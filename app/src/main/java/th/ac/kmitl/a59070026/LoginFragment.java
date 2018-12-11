@@ -1,5 +1,7 @@
 package th.ac.kmitl.a59070026;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.widget.Toast;
 
 public class LoginFragment extends Fragment {
     private SQLiteDatabase db;
+    private String user_id , nameS ,age;
+    private int id;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -49,16 +53,16 @@ public class LoginFragment extends Fragment {
                     Cursor pointer_query = db.rawQuery(selectQuery, null);
                     if (pointer_query != null){
                         if (pointer_query.moveToFirst()){
-//                            id = pointer_query.getInt(0);
-//                            user_id = pointer_query.getString(1);
-//                            name = pointer_query.getString(2);
-//                            age = pointer_query.getString(3);
-//                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("my_pref", Context.MODE_PRIVATE);
-//                            sharedPreferences.edit().putInt("id" , id).commit();
-//                            sharedPreferences.edit().putString("user_id" , user_id).commit();
-//                            sharedPreferences.edit().putString("name" , name).commit();
-//                            sharedPreferences.edit().putString("age" , age).commit();
-//                            Toast.makeText(getActivity(), "Login Success",Toast.LENGTH_SHORT).show();
+                            id = pointer_query.getInt(0);
+                            user_id = pointer_query.getString(1);
+                            nameS = pointer_query.getString(2);
+                            age = pointer_query.getString(3);
+                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("prefer", Context.MODE_PRIVATE);
+                            sharedPreferences.edit().putInt("id" , id).commit();
+                          sharedPreferences.edit().putString("user_id" , user_id).commit();
+                            sharedPreferences.edit().putString("name" , nameS).commit();
+                           sharedPreferences.edit().putString("age" , age).commit();
+                            Toast.makeText(getActivity(), "Login Success",Toast.LENGTH_SHORT).show();
                             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_view, new HomeFragment()).addToBackStack(null).commit();
                         }
                     }
